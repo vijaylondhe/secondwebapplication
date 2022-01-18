@@ -12,11 +12,14 @@ pipeline{
         }
         stage("Upload to Nexus"){
             steps{
+                script{
+
+                def mavenPom = readMavenPom file: 'pom.xml'
                 nexusArtifactUploader artifacts: [
                     [
                         artifactId: 'secondwebapplication', 
                         classifier: '', 
-                        file: 'target/secondwebapplication-0.0.1.war', 
+                        file: "target/secondwebapplication-${mavenPom.version}.war", 
                         type: 'war'
                     ]
                 ], 
@@ -26,7 +29,9 @@ pipeline{
                 nexusVersion: 'nexus3', 
                 protocol: 'http', 
                 repository: 'secondwebapplication-release', 
-                version: '0.0.1'
+                version: '${mavenPom.version}'
+                }
+
             }
         }
     }
