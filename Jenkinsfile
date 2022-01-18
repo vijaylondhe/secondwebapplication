@@ -22,7 +22,7 @@ pipeline{
                 ], 
                 credentialsId: 'nexus', 
                 groupId: 'com.msedcl', 
-                nexusUrl: '13.232.106.162:8081', 
+                nexusUrl: '172.31.98.182:8081', 
                 nexusVersion: 'nexus3', 
                 protocol: 'http', 
                 repository: 'secondwebapplication-release', 
