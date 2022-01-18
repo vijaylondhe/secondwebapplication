@@ -15,6 +15,7 @@ pipeline{
                 script{
 
                 def mavenPom = readMavenPom file: 'pom.xml'
+                def nexusRepoName = mavenPom.version.endsWith("SNAPSHOT") ? "secondwebapplication-snapshot" : "secondwebapplication-release"
                 nexusArtifactUploader artifacts: [
                     [
                         artifactId: 'secondwebapplication', 
@@ -28,7 +29,7 @@ pipeline{
                 nexusUrl: '172.31.98.182:8081', 
                 nexusVersion: 'nexus3', 
                 protocol: 'http', 
-                repository: 'secondwebapplication-release', 
+                repository: nexusRepoName, 
                 version: "${mavenPom.version}"
                 }
 
